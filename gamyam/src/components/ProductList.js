@@ -1,4 +1,4 @@
-export default function ProductList({ products }) {
+export default function ProductList({ products, onEdit }) {
     return (
         <table className="product-table">
             <thead>
@@ -14,7 +14,7 @@ export default function ProductList({ products }) {
                         <td>{p.description}</td>
                         <td>{p.category}</td>
                         <td>{p.stock}</td>
-                        <td><button >Edit</button></td>
+                        <td><button onClick={() => onEdit(p)}>Edit</button></td>
                     </tr>
                 ))}
             </tbody>

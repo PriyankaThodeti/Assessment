@@ -1,4 +1,4 @@
-export default function ProductCard({ products }) {
+export default function ProductCard({ products, onEdit }) {
   return (
     <div className="product-grid">
       {products.map((p) => (
@@ -7,7 +7,7 @@ export default function ProductCard({ products }) {
           <p>₹{p.price}</p>
           <p>{p.category}</p>
           <p>Stock: {p.stock}</p>
-          <button>Edit</button>
+          <button onClick={() => onEdit(p)}>Edit</button>
         </div>
       ))}
     </div>

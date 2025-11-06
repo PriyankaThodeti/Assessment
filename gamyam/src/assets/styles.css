@@ -1,0 +1,72 @@
+/* ==== GLOBAL RESET ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #eef2f3, #dfe9f3);
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ==== CONTAINER ==== */
+.container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 30px 40px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+h2 {
+  color: #1e293b;
+  font-size: 24px;
+  letter-spacing: 0.3px;
+}
+
+/* ==== TABLE VIEW ==== */
+.table-view {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-view th,
+.table-view td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.table-view th {
+  background: #6e00ff7a;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.table-view tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+
+/* ==== PRODUCT TABLE ==== */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
