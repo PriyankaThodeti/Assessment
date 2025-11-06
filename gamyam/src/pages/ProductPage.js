@@ -2,18 +2,19 @@ import { useState } from "react";
 import ProductList from "../components/ProductList";
 import ProductCard from "../components/ProductCard";
 import ProductForm from "../components/ProductForm";
+import Pagination from "../components/Pagination";
+import SearchBar from "../components/SearchBar";
+import ToggleView from "../components/ToggleView";
 import { sampleProducts } from "../data/sampleProducts";
 
 export default function ProductPage() {
-    const [products, setProducts] = useState(sampleProducts);;
+    const [products, setProducts] = useState(sampleProducts);
+    const [filtered, setFiltered] = useState(products);
     const [view, setView] = useState("list");
     const [editProduct, setEditProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
-
-    const handleEdit = (product) => {
-        setEditProduct(product);
-        setShowModal(true);
-    };
+    const [page, setPage] = useState(1);
+    const perPage = view === "list" ? 10 : 12;
 
     const handleSave = (product) => {
         if (editProduct) {
@@ -25,6 +26,22 @@ export default function ProductPage() {
         setShowModal(false);
     };
 
+    const handleSearch = (query) => {
+        if (!query) setFiltered(products);
+        else setFiltered(products.filter((p) => p.name.toLowerCase().includes(query.toLowerCase())));
+    };
+
+    const handleEdit = (product) => {
+        setEditProduct(product);
+        setShowModal(true);
+    };
+
+    const handleAdd = () => {
+        setEditProduct(null);
+        setShowModal(true);
+    };
+
+    const paginated = filtered.slice((page - 1) * perPage, page * perPage);
 
     return (
         <div className="container">
@@ -33,14 +50,27 @@ export default function ProductPage() {
                 <div className="left-controls">
                     <h2>Product Management</h2>
                 </div>
+                <div className="right-controls">
+                    <ToggleView view={view} setView={setView} />
+                    <SearchBar onSearch={handleSearch} />
+                    <button onClick={handleAdd} className="add-btn">Add Product</button>
+                </div>
             </div>
 
 
             {view === "list" ? (
-                <ProductList products={products} onEdit={handleEdit} />
+                <ProductList products={paginated} onEdit={handleEdit} />
             ) : (
-                <ProductCard products={products} onEdit={handleEdit} />
+                <ProductCard products={paginated} onEdit={handleEdit} />
             )}
+
+            <Pagination
+                currentPage={page}
+                totalPages={Math.ceil(filtered.length / perPage)}
+                onPageChange={setPage}
+                totalItems={filtered.length}
+                perPage={perPage}
+            />
 
             {/* 🧩 Modal */}
             {showModal && (
